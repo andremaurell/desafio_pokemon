@@ -21,12 +21,12 @@ router.get('/api/teams', async (req: Request, res: Response) => {
 });
 
 // Busca um time registrado por usuário
-router.get('/api/teams/:username', async (req: Request, res: Response) => {
-    const username = req.params.username;
+router.get('/api/teams/:owner', async (req: Request, res: Response) => {
+    const owner = req.params.owner;
     try {
-        const { rows } = await pool.query('SELECT * FROM teams WHERE owner = $1', [username]);
+        const { rows } = await pool.query('SELECT * FROM teams WHERE owner = $1', [owner]);
         if (rows.length === 0) {
-            res.status(404).json({ error: 'Team not found for the specified username.' });
+            res.status(404).json({ error: 'Team not found for the specified owner.' });
         } else {
             res.json(rows);
         }
@@ -37,10 +37,10 @@ router.get('/api/teams/:username', async (req: Request, res: Response) => {
 
 // Rota para criação de um time
 router.post('/api/teams', async (req: Request, res: Response) => {
-    const { username, pokemon_list } = req.body;
+    const { user, team } = req.body;
 
-    if (!username || !pokemon_list || !Array.isArray(pokemon_list)) {
-        res.status(400).json({ error: 'Username and pokemon_list are required as an array.' });
+    if (!user || !team || !Array.isArray(team)) {
+        res.status(400).json({ error: 'User and team are required as an array.' });
         return;
     }
 
@@ -49,7 +49,7 @@ router.post('/api/teams', async (req: Request, res: Response) => {
         await client.query('BEGIN');
 
         const pokemonDetailsList: PokemonDetails[] = [];
-        for (const pokemonName of pokemon_list) {
+        for (const pokemonName of team) {
             try {
                 const response = await axios.get(`${POKEAPI_URL}${pokemonName}`);
                 const { id, height, weight } = response.data;
@@ -61,7 +61,7 @@ router.post('/api/teams', async (req: Request, res: Response) => {
             }
         }
 
-        await client.query('INSERT INTO teams (owner, pokemons) VALUES ($1, $2)', [username, JSON.stringify(pokemonDetailsList)]);
+        await client.query('INSERT INTO teams (owner, pokemons) VALUES ($1, $2)', [user, JSON.stringify(pokemonDetailsList)]);
         await client.query('COMMIT');
         res.json({ message: 'Team created successfully.' });
     } catch (error) {

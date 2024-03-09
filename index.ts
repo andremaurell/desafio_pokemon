@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { router } from './src/routes';
+import { createTeamsTable } from './src/utils';
 
 
 dotenv.config();
@@ -19,6 +20,8 @@ const pool = new Pool({
     password: process.env.PGPASSWORD,
     port: parseInt(process.env.PGPORT || '5432', 10),
   });
+
+createTeamsTable()
 
 
 const PORT = process.env.PORT || 3000;
