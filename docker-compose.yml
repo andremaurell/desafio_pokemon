@@ -14,9 +14,9 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=desafio_pokemon
-      - POSTGRES_PASSWORD=Andre32323121!
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_DB=${PGDATABASE}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - ./db/data/postgres:/var/lib/postgresql/data
