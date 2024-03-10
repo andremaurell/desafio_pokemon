@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
 import { router } from './src/routes';
 import { createTeamsTable } from './src/utils';
+import dotenv from 'dotenv';
 
 
 dotenv.config();
