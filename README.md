@@ -16,7 +16,10 @@ Esta aplicação tem como objetivo cumprir o desáfio do processo seletivo de es
    - Rota para criação de um time a partir de um .JSON
 
 **OBS: na branch "pokedex" existem outras duas rotas adicionais implementadas, cada uma delas com um objetivo específico escrito no readme da mesma!!**
-
+   - Troque de branch:
+     ```bash
+     git checkout pokedex
+     ```
 ## Como usar:
 
 1. **Instalação**
