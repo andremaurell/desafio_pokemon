@@ -4,7 +4,7 @@
 
 Esta aplicação tem como objetivo cumprir o desáfio do processo seletivo de estágio da empresa Triágil. Ve-se como objetivo principal ter uma API utilizavel a partir da API [pokeapi.co](https://pokeapi.co/), possibilitando com que o usuário crie times pokemon, verifique todos os times existentes no banco de dados e verifique todos os times de cada um dos treinadores pokemon.
 
-## End Points:
+## Rotas:
 
 1. **GET /api/teams**
    - Deverá listar todos os times registrados
