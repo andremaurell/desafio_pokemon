@@ -11,14 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(router);
 
-
+const PG_URL = "postgres://default:17LolrYQGieb@ep-restless-hat-a43p2mw7.us-east-1.aws.neon.tech:5432/verceldb"
 
 const pool = new Pool({
-    user: process.env.PGUSER,
-    host: process.env.PGHOST,
-    database: process.env.PGDATABASE,
-    password: process.env.PGPASSWORD,
-    port: parseInt(process.env.PGPORT || '5432', 10),
+  connectionString: PG_URL + "?sslmode=require",
   });
 
 createTeamsTable()
