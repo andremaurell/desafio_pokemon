@@ -40,11 +40,11 @@ Esta aplicação tem como objetivo cumprir o desáfio do processo seletivo de es
       docker-compose up --build -d
      ```
    - Execute o docker:
-       ```bash
+    ```bash
       docker-compose up
      ```
    - Para deletar os containers:
-          ```bash
+    ```bash
       docker-compose down
      ```
 ## Tecnologias utilizadas:
